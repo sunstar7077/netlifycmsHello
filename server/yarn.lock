@@ -571,6 +571,12 @@ setprototypeof@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.0.tgz#d0bd85536887b6fe7c0d818cb962d9d91c54e656"
 
+simple-git@^1.92.0:
+  version "1.92.0"
+  resolved "https://registry.yarnpkg.com/simple-git/-/simple-git-1.92.0.tgz#6061468eb7d19f0141078fc742e62457e910f547"
+  dependencies:
+    debug "^3.1.0"
+
 simple-oauth2@^1.2.0:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/simple-oauth2/-/simple-oauth2-1.5.2.tgz#99d7f1e9875e3e6039dccb381a5c1c9744d5823c"

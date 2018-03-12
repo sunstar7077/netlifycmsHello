@@ -9,6 +9,7 @@ const randomstring = require('randomstring')
 const port = process.env.PORT || 3000
 
 const projectRootDir = require('../projectRootDir')
+const simpleGit = require('simple-git')(projectRootDir);
 
 const app = express()
 
@@ -88,6 +89,13 @@ app.get('/success', (req, res) => {
 app.get('/', (req, res) => {
   res.send('Hello<br><a href="/auth">Log in with Github</a>')
 })
+
+app.all('*', (req, res, next) => {
+  console.log('next');
+  simpleGit.pull('origin', 'master', {'--rebase': 'true'}).exec(() => {
+    next();
+  })
+});
 
 app.use(serveStatic(path.resolve(projectRootDir, 'public')));
 
