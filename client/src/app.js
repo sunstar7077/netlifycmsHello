@@ -51,7 +51,7 @@ class GithubImageControl extends React.Component {
     // const repo = backend.get('repo');
     // const branch = backend.get('branch');
     // const url = `https://github.com/${repo}/raw/${branch}`
-    const url = `https://github.com/piecyk/netlifycmsHello/raw/content`
+    const url = `https://github.com/piecyk/netlifycmsHello/raw/master`
 
     return (
       <orgImage.control
