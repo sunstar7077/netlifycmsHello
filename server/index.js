@@ -91,15 +91,14 @@ app.get('/', (req, res) => {
 })
 
 // in dev serve from github
-app.get('/assets*', (req, res, next) => {
+app.get('/assets*', (req, res) => {
   const host = 'https://raw.githubusercontent.com/piecyk/netlifycmsHello/master'
-  request.get(`${host}/public${req.originalUrl}`,
-  (err, respo, body) => {
-    if (err) {
-      return console.error(err);
+  req.pipe(request({
+    url: `${host}/public${req.originalUrl}`,
+    headers: {
+      'cache-control': 'no-cache'
     }
-    return next(body);
-  })
+  })).pipe(res)
 });
 
 // in production just serve from local static
