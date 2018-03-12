@@ -1,15 +1,15 @@
 require('dotenv').config({silent: true})
 
 const path = require('path');
-const serveStatic = require('serve-static')
-// const request = require('request');
 const express = require('express')
 const simpleOauthModule = require('simple-oauth2')
 const randomstring = require('randomstring')
 const port = process.env.PORT || 3000
 
-const projectRootDir = require('../projectRootDir')
-const simpleGit = require('simple-git')(projectRootDir);
+// const projectRootDir = require('../projectRootDir')
+// const simpleGit = require('simple-git')(projectRootDir);
+// const serveStatic = require('serve-static')
+const request = require('request');
 
 const app = express()
 
@@ -90,14 +90,20 @@ app.get('/', (req, res) => {
   res.send('Hello<br><a href="/auth">Log in with Github</a>')
 })
 
-app.all('*', (req, res, next) => {
-  console.log('next');
-  simpleGit.pull('origin', 'master', {'--rebase': 'true'}).exec(() => {
-    next();
+// in dev serve from github
+app.get('/assets*', (req, res, next) => {
+  const host = 'https://raw.githubusercontent.com/piecyk/netlifycmsHello/master'
+  request.get(`${host}/public${req.originalUrl}`,
+  (err, respo, body) => {
+    if (err) {
+      return console.error(err);
+    }
+    return next(body);
   })
 });
 
-app.use(serveStatic(path.resolve(projectRootDir, 'public')));
+// in production just serve from local static
+// app.use(serveStatic(path.resolve(projectRootDir, 'public')));
 
 app.listen(port, () => {
   console.log("gandalf is walkin' on port " + port)
