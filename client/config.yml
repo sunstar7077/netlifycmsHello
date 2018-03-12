@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: piecyk/netlifycmsContent
+  repo: piecyk/netlifycmsHello
   branch: master
   base_url: http://127.0.0.1:8089
 
